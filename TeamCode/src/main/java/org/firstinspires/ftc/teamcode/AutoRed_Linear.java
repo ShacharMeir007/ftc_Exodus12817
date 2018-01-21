@@ -196,7 +196,7 @@ public class AutoRed_Linear extends LinearOpMode {
 
             if(count == 0) {
 
-                robot.S2Motor.setPosition(0.76);
+                robot.S1Motor.setPosition(0.7);
                 robot.sleep(1000);
                 if (robot.colorSensor.red() < robot.colorSensor.blue()){
                     robot.S2Motor.setPosition(0.3);
@@ -212,14 +212,14 @@ public class AutoRed_Linear extends LinearOpMode {
                 if (position == 1) {
                     telemetry.addData("vuMark", "right");
                     telemetry.update();
-                    robot.setTarget(5000);
-                    robot.Right(0.2);
-
-
+                    //robot.setTarget(5000);
+                    robot.Right(-0.2);
+                    sleep(1000);
+                    robot.Stop();
                 }
 
 
-                else if (position == 2) {
+                else if (position == 2|| position ==0) {
                     telemetry.addData("vuMark", "center");
                     telemetry.update();
                 }
@@ -229,7 +229,7 @@ public class AutoRed_Linear extends LinearOpMode {
                     telemetry.update();
                 }
 
-
+                count++;
 
 
 

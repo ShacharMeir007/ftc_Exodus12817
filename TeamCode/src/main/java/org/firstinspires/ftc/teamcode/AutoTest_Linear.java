@@ -65,8 +65,7 @@ public class AutoTest_Linear extends LinearOpMode {
         robot.init(hardwareMap);
 
         robot.resetMotors();
-        robot.setTarget(5000);
-        robot.Right(0.3);
+        robot.Right(-1,-5000);
         waitForStart();
         runtime.reset();
 

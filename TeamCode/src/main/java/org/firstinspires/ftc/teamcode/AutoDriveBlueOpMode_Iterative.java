@@ -151,21 +151,21 @@ public class AutoDriveBlueOpMode_Iterative extends OpMode {
             robot.S1Motor.setPosition(0.76);
             robot.sleep(1000);
             if (robot.colorSensor.red() > robot.colorSensor.blue()) {
-                robot.TurnRight(0.1);
+                robot.TurnRight(0.1,5);
                 robot.sleep(600);
                 robot.Stop();
                 robot.S1Motor.setPosition(0.2);
                 robot.sleep(1000);
-                robot.Forward(0.1);
+                robot.Forward(0.1,5);
                 robot.sleep(450);
                 robot.Stop();
             } else {
-                robot.TurnLeft(0.1);
+                robot.TurnLeft(0.1,5);
                 robot.sleep(600);
                 robot.Stop();
                 robot.S1Motor.setPosition(0.2);
                 robot.sleep(1000);
-                robot.Forward(0.1);
+                robot.Forward(0.1,5);
                 robot.sleep(450);
                 robot.Stop();
 
