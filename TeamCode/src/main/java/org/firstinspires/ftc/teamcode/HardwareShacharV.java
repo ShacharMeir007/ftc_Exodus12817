@@ -245,6 +245,7 @@ import java.util.Locale;
         A4Motor.setPower(-power);
     }
 
+
     static void Forward(double power, int target){
         A1Motor.setTargetPosition(target);
         A2Motor.setTargetPosition(target);
@@ -270,6 +271,7 @@ import java.util.Locale;
         A3Motor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         A4Motor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
     }
+    /**
         static void Backwards (double power, int target){
         A1Motor.setTargetPosition(target);
         A2Motor.setTargetPosition(target);
@@ -280,45 +282,71 @@ import java.util.Locale;
         A2Motor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         A3Motor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         A4Motor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        /**
-         *
-         **/
+
         A1Motor.setPower(power);
         A2Motor.setPower(-power);
         A3Motor.setPower(power);
         A4Motor.setPower(-power);
-        /**
-         *
-         **/
+
         A1Motor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         A2Motor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         A3Motor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         A4Motor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
     }
+    **/
     static void Right (double power, int target){
-        A1Motor.setTargetPosition(target);
-        A2Motor.setTargetPosition(-target);
-        A3Motor.setTargetPosition(target);
-        A4Motor.setTargetPosition(-target);
+        //A1Motor.setTargetPosition(target);
+        //A2Motor.setTargetPosition(-target);
+        //A3Motor.setTargetPosition(target);
+        //A4Motor.setTargetPosition(-target);
 
 
         /**
          *
          **/
-        while (A1Motor.getCurrentPosition()> target) {
-            A1Motor.setPower(-power);
-            A2Motor.setPower(-power);
-            A3Motor.setPower(-power);
-            A4Motor.setPower(-power);
+        if (A3Motor.getCurrentPosition() < target) {
+            while (A3Motor.getCurrentPosition() < target) {
+                A1Motor.setPower(-power);
+                A2Motor.setPower(-power);
+                A3Motor.setPower(power);
+                A4Motor.setPower(power);
+            }
+            /**
+             *
+             **/
+            //A1Motor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+            //A2Motor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+            //A3Motor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+            //A4Motor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         }
-        /**
-         *
-         **/
-        A1Motor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        A2Motor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        A3Motor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        A4Motor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        else if (A3Motor.getCurrentPosition() > target){
+            power = -power;
+            while (A3Motor.getCurrentPosition() > target) {
+                A1Motor.setPower(-power);
+                A2Motor.setPower(power);
+                A3Motor.setPower(power);
+                A4Motor.setPower(-power);
+            }
+
+        }
+        else;
+        A1Motor.setPower(0);
+        A2Motor.setPower(0);
+        A3Motor.setPower(0);
+        A4Motor.setPower(0);
+
+        A1Motor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        A2Motor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        A3Motor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        A4Motor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+
+        A1Motor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        A2Motor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        A3Motor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        A4Motor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+
     }
+    /**
     static void Left (double power, int target){
         A1Motor.setTargetPosition(target);
         A2Motor.setTargetPosition(target);
@@ -331,19 +359,20 @@ import java.util.Locale;
         A4Motor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         /**
          *
-         **/
+
         A1Motor.setPower(-power);
         A2Motor.setPower(power);
         A3Motor.setPower(-power);
         A4Motor.setPower(power);
         /**
          *
-         **/
+
         A1Motor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         A2Motor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         A3Motor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         A4Motor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-    }
+    }**/
+    /**
     static void TurnLeft(double power, int target){
         A1Motor.setTargetPosition(target);
         A2Motor.setTargetPosition(target);
@@ -366,6 +395,7 @@ import java.util.Locale;
         A3Motor.setPower(power);
         A4Motor.setPower(power);
     }
+     */
     public final void sleep(long milliseconds) {
         try {
             Thread.sleep(milliseconds);

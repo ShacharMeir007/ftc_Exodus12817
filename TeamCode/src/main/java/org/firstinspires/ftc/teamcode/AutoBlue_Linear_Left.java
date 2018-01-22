@@ -30,12 +30,8 @@
 package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
-import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
-import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
-import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.ElapsedTime;
-import com.qualcomm.robotcore.util.Range;
 
 import org.firstinspires.ftc.robotcore.external.ClassFactory;
 import org.firstinspires.ftc.robotcore.external.matrices.OpenGLMatrix;
@@ -64,9 +60,9 @@ import org.firstinspires.ftc.robotcore.external.navigation.VuforiaTrackables;
  * Remove or comment out the @Disabled line to add this opmode to the Driver Station OpMode list
  */
 
-@Autonomous(name="Red Autonomous", group="Linear Opmode")
+@Autonomous(name="Blue Autonomous_Left", group="Linear Opmode")
 //@Disabled
-public class AutoRed_Linear extends LinearOpMode {
+public class AutoBlue_Linear_Left extends LinearOpMode {
 
     // Declare OpMode members.
     private ElapsedTime runtime = new ElapsedTime();
@@ -199,38 +195,72 @@ public class AutoRed_Linear extends LinearOpMode {
                 robot.S1Motor.setPosition(0.7);
                 robot.sleep(1000);
                 if (robot.colorSensor.red() < robot.colorSensor.blue()){
-                    robot.S2Motor.setPosition(0.3);
+                    robot.S2Motor.setPosition(0.7);
 
 
                 }
-                else robot.S2Motor.setPosition(0.7);
+                else robot.S2Motor.setPosition(0.3);
                 sleep(1000);
                 robot.S2Motor.setPosition(0.5);
                 robot.S1Motor.setPosition(0.2);
                 robot.resetMotors();
 
+                robot.B2Motor.setPower(0.2);
+                robot.B1Motor.setPower(-0.2);
+                sleep(2000);
+                robot.B1Motor.setPower(0);
+                robot.Right(-0.3);
+                sleep(2000);
+
+
+                robot.TurnRight(-0.3);
+                sleep(1440);
+
+
+
+
                 if (position == 1) {
                     telemetry.addData("vuMark", "right");
                     telemetry.update();
-                    //robot.setTarget(5000);
-                    robot.Right(-0.2);
-                    sleep(1000);
-                    robot.Stop();
+
+                    robot.Right(0.3);
+                    sleep(1960);
                 }
-
-
                 else if (position == 2|| position ==0) {
                     telemetry.addData("vuMark", "center");
                     telemetry.update();
+                    robot.Right(0.3);
+                    sleep(1300);
+
+
+
+
                 }
 
                 else if (position == 3) {
                     telemetry.addData("vuMark", "left");
                     telemetry.update();
+                    robot.Right(0.3);
+                    sleep(420);
+
                 }
+                robot.Stop();
+                robot.sleep(3000);
+                robot.Forward(0.3);
+                sleep(800);
+                robot.Stop();
+                robot.B2Motor.setPower(0);
+
+                robot.Forward(-0.3);
+                sleep(450);
+                robot.Forward(0.3);
+                sleep(1000);
+                robot.Forward(-0.3);
+                sleep(300);
+                robot.Stop();
+
 
                 count++;
-
 
 
             }

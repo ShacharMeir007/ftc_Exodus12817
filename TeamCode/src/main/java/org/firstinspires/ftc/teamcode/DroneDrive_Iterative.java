@@ -254,29 +254,22 @@ public class DroneDrive_Iterative extends OpMode {
 
 
 
-        if(gamepad2.a){
-            target = 750;
-            robot.B2Motor.setTargetPosition(target);
-            robot.B2Motor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-            if(robot.B2Motor.getCurrentPosition() > target)robot.B1Motor.setPower(-0.3);
-            else robot.B2Motor.setPower(0.3);
-            robot.B2Motor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        }
-        else{
+
+
             if(gamepad2.right_trigger > 0.1)
             {
-                if(robot.B2Motor.getCurrentPosition() > -30)robot.B2Motor.setPower(-gamepad2.right_trigger*0.3);
-                else robot.B2Motor.setPower(0);
+                robot.B2Motor.setPower(-gamepad2.right_trigger*0.1);
+
             }
             else {
                 if(gamepad2.left_trigger >0.1)
                 {
-                    if(robot.B2Motor.getCurrentPosition() < 30)robot.B2Motor.setPower(gamepad2.left_trigger*0.3);
-                    else robot.B2Motor.setPower(0);
+                    robot.B2Motor.setPower(gamepad2.left_trigger*0.3);
+
                 }
                 else robot.B2Motor.setPower(0);
             }
-        }
+
 
 
         robot.B1Motor.setPower(gamepad2.right_stick_y);

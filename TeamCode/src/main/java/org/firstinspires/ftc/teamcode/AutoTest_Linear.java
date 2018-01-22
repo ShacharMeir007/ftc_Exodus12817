@@ -36,6 +36,10 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.util.Range;
 
+import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
+import org.firstinspires.ftc.robotcore.external.navigation.AxesOrder;
+import org.firstinspires.ftc.robotcore.external.navigation.AxesReference;
+
 
 /**
  * This file contains an minimal example of a Linear "OpMode". An OpMode is a 'program' that runs in either
@@ -65,16 +69,46 @@ public class AutoTest_Linear extends LinearOpMode {
         robot.init(hardwareMap);
 
         robot.resetMotors();
-        robot.Right(-1,-5000);
+        robot.angles = robot.imu.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES);
+Double z = 0.0;
+int count = 0;
+z = Double.parseDouble("-0.0");
+        robot.Right(0.5, 5000);
+
+
+
         waitForStart();
         runtime.reset();
 
         // run until the end of the match (driver presses STOP)
+
         while (opModeIsActive()) {
+
+
+            /*
+            if (count == 0){
+                float gyro_z = Float.parseFloat(robot.formatAngle(robot.angles.angleUnit, robot.angles.firstAngle));
+                while ( gyro_z < 90) {
+                    telemetry.addData("gyro", robot.formatAngle(robot.angles.angleUnit, robot.angles.firstAngle));
+                    telemetry.update();
+                    robot.TurnRight(-0.2);
+                    robot.angles = robot.imu.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES);
+                    telemetry.addData("gyro", " hi");
+                    gyro_z = Float.parseFloat(robot.formatAngle(robot.angles.angleUnit, robot.angles.firstAngle));
+                }
+                robot.Right(0.3,5000);
+
+
+
+
+
+            }
+            */
+            telemetry.addData("1", robot.formatAngle(robot.angles.angleUnit, robot.angles.firstAngle));
             telemetry.addData("Status", "A1 = " + robot.A1Motor.getCurrentPosition() );
-            telemetry.addData("Status", "A1 = " + robot.A2Motor.getCurrentPosition() );
-            telemetry.addData("Status", "A1 = " + robot.A3Motor.getCurrentPosition() );
-            telemetry.addData("Status", "A1 = " + robot.A4Motor.getCurrentPosition() );
+            telemetry.addData("Status", "A2 = " + robot.A2Motor.getCurrentPosition() );
+            telemetry.addData("Status", "A3 = " + robot.A3Motor.getCurrentPosition() );
+            telemetry.addData("Status", "A4 = " + robot.A4Motor.getCurrentPosition() );
 
 
             // Show the elapsed game time and wheel power.
