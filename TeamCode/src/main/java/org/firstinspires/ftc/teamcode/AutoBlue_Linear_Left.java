@@ -241,7 +241,7 @@ public class AutoBlue_Linear_Left extends LinearOpMode {
                     telemetry.addData("vuMark", "left");
                     telemetry.update();
                     robot.Right(0.3);
-                    sleep(420);
+                    sleep(400);
 
                 }
                 robot.Stop();

@@ -243,7 +243,7 @@ public class AutoRed_Linear_Left extends LinearOpMode {
                     telemetry.update();
 
                     robot.Right(0.3);
-                    sleep(3000);
+                    sleep(2700);
                     robot.TurnRight(0.3);
                     sleep(3050);
                 }

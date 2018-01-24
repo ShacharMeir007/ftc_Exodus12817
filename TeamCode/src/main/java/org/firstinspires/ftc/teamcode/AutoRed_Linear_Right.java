@@ -224,7 +224,7 @@ public class AutoRed_Linear_Right extends LinearOpMode {
                     telemetry.update();
 
                     robot.Right(-0.3);
-                    sleep(420);
+                    sleep(400);
                 }
                 else if (position == 2|| position ==0) {
                     telemetry.addData("vuMark", "center");
@@ -258,6 +258,8 @@ public class AutoRed_Linear_Right extends LinearOpMode {
                 robot.Forward(-0.3);
                 sleep(300);
                 robot.Stop();
+
+                count++;
 
 
             }

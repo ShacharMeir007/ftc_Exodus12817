@@ -233,7 +233,7 @@ public class AutoBlue_Linear_Right extends LinearOpMode {
                     telemetry.update();
 
                     robot.Right(-0.3);
-                    sleep(3900);
+                    sleep(3750);
                     robot.TurnRight(0.3);
                     sleep(3050);
 
@@ -244,7 +244,7 @@ public class AutoBlue_Linear_Right extends LinearOpMode {
                     telemetry.update();
 
                     robot.Right(-0.3);
-                    sleep(3000);
+                    sleep(2700);
                     robot.TurnRight(-0.3);
                     sleep(3050);
                 }
