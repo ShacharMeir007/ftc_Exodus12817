@@ -68,12 +68,20 @@ public class AutoTest_Linear extends LinearOpMode {
         telemetry.update();
         robot.init(hardwareMap);
 
-        robot.resetMotors();
+        robot.resetEncoders();
         robot.angles = robot.imu.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES);
-Double z = 0.0;
-int count = 0;
-z = Double.parseDouble("-0.0");
-        robot.Right(0.5, 5000);
+
+        telemetry.addData("Status", "A1 = " + robot.A1Motor.getCurrentPosition() );
+        telemetry.addData("Status", "A2 = " + robot.A2Motor.getCurrentPosition() );
+        telemetry.addData("Status", "A3 = " + robot.A3Motor.getCurrentPosition() );
+        telemetry.addData("Status", "A4 = " + robot.A4Motor.getCurrentPosition() );
+        telemetry.update();
+        while (Double.parseDouble(robot.formatAngle(AngleUnit.DEGREES,robot.angles.firstAngle))< 0){
+            robot.TurnRight(-0.5);
+        }
+        sleep(1000);
+        robot.Right(0.5, 1120);
+        robot.resetEncoders();
 
 
 

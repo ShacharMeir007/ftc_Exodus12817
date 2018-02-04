@@ -125,23 +125,29 @@ import java.util.Locale;
         // Save reference to Hardware map
         hwMap = ahwMap;
 
-        // Define and Initialize Motors
-
+        // Define and Initialize Motors, Sensors and Vuforia
         A1Motor = hwMap.get(DcMotor.class,"A1_drive");
         A2Motor = hwMap.get(DcMotor.class,"A2_drive");
         A3Motor = hwMap.get(DcMotor.class,"A3_drive");
         A4Motor = hwMap.get(DcMotor.class,"A4_drive");
         B1Motor = hwMap.get(DcMotor.class,"B1");
         B2Motor = hwMap.get(DcMotor.class,"B2");
-        //B2Motor = hwMap.get(DcMotor.class,"B2_arm");
         S1Motor = hwMap.get(Servo.class,"S1");
         S2Motor = hwMap.get(Servo.class,"S2");
 
 
         colorSensor = hwMap.get(ColorSensor.class , "color");
 
-
+        A1Motor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        A2Motor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        A3Motor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        A4Motor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         B2Motor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+
+        A1Motor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        A2Motor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        A3Motor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        A4Motor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         B2Motor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
 
@@ -246,94 +252,135 @@ import java.util.Locale;
     }
 
 
-    static void Forward(double power, int target){
-        A1Motor.setTargetPosition(target);
-        A2Motor.setTargetPosition(target);
-        A3Motor.setTargetPosition(target);
-        A4Motor.setTargetPosition(target);
 
-        A1Motor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        A2Motor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        A3Motor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        A4Motor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        /**
-         *
-         **/
-        A1Motor.setPower(-power);
-        A2Motor.setPower(power);
-        A3Motor.setPower(-power);
-        A4Motor.setPower(power);
-        /**
-         *
-         **/
-        A1Motor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        A2Motor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        A3Motor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        A4Motor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-    }
-    /**
-        static void Backwards (double power, int target){
-        A1Motor.setTargetPosition(target);
-        A2Motor.setTargetPosition(target);
-        A3Motor.setTargetPosition(target);
-        A4Motor.setTargetPosition(target);
-
-        A1Motor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        A2Motor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        A3Motor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        A4Motor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-
-        A1Motor.setPower(power);
-        A2Motor.setPower(-power);
-        A3Motor.setPower(power);
-        A4Motor.setPower(-power);
-
-        A1Motor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        A2Motor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        A3Motor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        A4Motor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-    }
-    **/
     static void Right (double power, int target){
         //A1Motor.setTargetPosition(target);
         //A2Motor.setTargetPosition(-target);
         //A3Motor.setTargetPosition(target);
         //A4Motor.setTargetPosition(-target);
-
-
+        power = Math.abs(power);
+        final double inc = power/10;
+        int count = 1;
         /**
          *
          **/
         if (A3Motor.getCurrentPosition() < target) {
             while (A3Motor.getCurrentPosition() < target) {
+                    if (count<=10){
+                        power = inc * count;
+                    }
+
+                    sleep(100);
+                    A1Motor.setPower(-power);
+                    A2Motor.setPower(-power);
+                    A3Motor.setPower(power);
+                    A4Motor.setPower(power);
+                    count++;
+
+            }
+
+        }
+        else if (A3Motor.getCurrentPosition() > target){
+            power = -power;
+            count = -count;
+            while (A3Motor.getCurrentPosition() > target) {
+                if (count>=-10){
+                    power = inc * count;
+                }
+
+                sleep(100);
                 A1Motor.setPower(-power);
                 A2Motor.setPower(-power);
                 A3Motor.setPower(power);
                 A4Motor.setPower(power);
-            }
-            /**
-             *
-             **/
-            //A1Motor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-            //A2Motor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-            //A3Motor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-            //A4Motor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        }
-        else if (A3Motor.getCurrentPosition() > target){
-            power = -power;
-            while (A3Motor.getCurrentPosition() > target) {
-                A1Motor.setPower(-power);
-                A2Motor.setPower(power);
-                A3Motor.setPower(power);
-                A4Motor.setPower(-power);
+                count--;
             }
 
         }
-        else;
+        else{}
+
+        A1Motor.setPower(power);
+        A2Motor.setPower(power);
+        A3Motor.setPower(-power);
+        A4Motor.setPower(-power);
+        sleep(25);
+
         A1Motor.setPower(0);
         A2Motor.setPower(0);
         A3Motor.setPower(0);
         A4Motor.setPower(0);
+
+
+
+        A1Motor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        A2Motor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        A3Motor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        A4Motor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+
+        A1Motor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        A2Motor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        A3Motor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        A4Motor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+
+    }
+    static void Forward (double power, int target){
+        //A1Motor.setTargetPosition(target);
+        //A2Motor.setTargetPosition(-target);
+        //A3Motor.setTargetPosition(target);
+        //A4Motor.setTargetPosition(-target);
+        power = Math.abs(power);
+        final double inc = power/10;
+        int count = 1;
+        /**
+         *
+         **/
+        if (A3Motor.getCurrentPosition() < target) {
+            while (A3Motor.getCurrentPosition() < target) {
+                if (count<=10){
+                    power = inc * count;
+                }
+
+                sleep(100);
+                A1Motor.setPower(power);
+                A2Motor.setPower(-power);
+                A3Motor.setPower(-power);
+                A4Motor.setPower(power);
+                count++;
+
+            }
+
+        }
+        else if (A3Motor.getCurrentPosition() > target){
+            power = -power;
+            count = -count;
+            while (A3Motor.getCurrentPosition() > target) {
+                if (count>=-10){
+                    power = inc * count;
+                }
+
+                sleep(100);
+                A1Motor.setPower(power);
+                A2Motor.setPower(-power);
+                A3Motor.setPower(-power);
+                A4Motor.setPower(power);
+                count--;
+            }
+
+        }
+        else{}
+
+        A1Motor.setPower(power);
+        A2Motor.setPower(power);
+        A3Motor.setPower(-power);
+        A4Motor.setPower(-power);
+        sleep(25);
+
+        A1Motor.setPower(0);
+        A2Motor.setPower(0);
+        A3Motor.setPower(0);
+        A4Motor.setPower(0);
+
+
 
         A1Motor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         A2Motor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
@@ -396,7 +443,7 @@ import java.util.Locale;
         A4Motor.setPower(power);
     }
      */
-    public final void sleep(long milliseconds) {
+    public static final void sleep(long milliseconds) {
         try {
             Thread.sleep(milliseconds);
         } catch (InterruptedException e) {
@@ -499,7 +546,7 @@ import java.util.Locale;
     }
 
 
-     public void resetMotors(){
+     public void resetEncoders(){
         A1Motor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         A2Motor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         A3Motor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);

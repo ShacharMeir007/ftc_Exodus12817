@@ -203,7 +203,7 @@ public class AutoRed_Linear_Right extends LinearOpMode {
                 sleep(1000);
                 robot.S2Motor.setPosition(0.5);
                 robot.S1Motor.setPosition(0.2);
-                robot.resetMotors();
+                robot.resetEncoders();
 
                 robot.B2Motor.setPower(0.2);
                 robot.B1Motor.setPower(-0.2);
