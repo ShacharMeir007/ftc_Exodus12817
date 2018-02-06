@@ -30,7 +30,7 @@ public class ObjectTracker extends LinearOpMode {
         VuforiaLocalizer vuforiaLocalizer = ClassFactory.createVuforiaLocalizer(parameters);
         Vuforia.setHint(HINT.HINT_MAX_SIMULTANEOUS_OBJECT_TARGETS,1);
 
-        VuforiaTrackables crypto = vuforiaLocalizer.loadTrackablesFromAsset("");
+        VuforiaTrackables crypto = vuforiaLocalizer.loadTrackablesFromAsset("crypto_OT.xml");
         crypto.get(0).setName("crypto");
 
 
