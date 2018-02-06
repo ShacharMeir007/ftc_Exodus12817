@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.vuforia.HINT;
 import com.vuforia.Vuforia;
 
@@ -17,7 +18,8 @@ import java.security.Policy;
 /**
  * Created by shach on 2/6/2018.
  */
-
+@TeleOp(name="Auto test", group="Linear Opmode")
+//@Disabled
 public class ObjectTracker extends LinearOpMode {
     @Override
     public void runOpMode() throws InterruptedException {
