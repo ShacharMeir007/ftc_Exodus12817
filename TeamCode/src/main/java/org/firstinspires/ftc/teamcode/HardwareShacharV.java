@@ -42,6 +42,7 @@ import com.qualcomm.robotcore.hardware.NormalizedColorSensor;
 import com.qualcomm.robotcore.hardware.NormalizedRGBA;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
+import com.vuforia.Tracker;
 
 import org.firstinspires.ftc.robotcontroller.external.samples.SensorColor;
 import org.firstinspires.ftc.robotcore.external.ClassFactory;
@@ -94,7 +95,7 @@ import java.util.Locale;
     static public Servo S2Motor = null;
 
 
-
+    ObjectTracker Tra = new ObjectTracker();
     static public  ColorSensor colorSensor = null;
 
     int vuMarkposition= 0;
@@ -123,6 +124,7 @@ import java.util.Locale;
     /* Initialize standard Hardware interfaces */
     public  void init(HardwareMap ahwMap) {
         // Save reference to Hardware map
+
         hwMap = ahwMap;
 
         // Define and Initialize Motors, Sensors and Vuforia

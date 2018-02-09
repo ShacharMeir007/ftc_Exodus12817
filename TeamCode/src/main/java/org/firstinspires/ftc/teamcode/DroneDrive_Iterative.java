@@ -258,13 +258,13 @@ public class DroneDrive_Iterative extends OpMode {
 
             if(gamepad2.left_trigger > 0.1)
             {
-                robot.B2Motor.setPower(-gamepad2.right_trigger*0.2);
+                robot.B2Motor.setPower(-gamepad2.left_trigger*0.2);
 
             }
             else {
                 if(gamepad2.right_trigger>0.1)
                 {
-                    robot.B2Motor.setPower(gamepad2.left_trigger*0.2);
+                    robot.B2Motor.setPower(gamepad2.right_trigger*0.2);
 
                 }
                 else robot.B2Motor.setPower(0);

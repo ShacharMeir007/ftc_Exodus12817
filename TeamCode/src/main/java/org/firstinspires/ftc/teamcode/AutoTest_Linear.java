@@ -70,26 +70,40 @@ public class AutoTest_Linear extends LinearOpMode {
 
         robot.resetEncoders();
         robot.angles = robot.imu.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES);
-
+        String z = robot.formatAngle(AngleUnit.DEGREES, robot.angles.firstAngle);
+        telemetry.addData("z", z);
         telemetry.addData("Status", "A1 = " + robot.A1Motor.getCurrentPosition() );
         telemetry.addData("Status", "A2 = " + robot.A2Motor.getCurrentPosition() );
         telemetry.addData("Status", "A3 = " + robot.A3Motor.getCurrentPosition() );
         telemetry.addData("Status", "A4 = " + robot.A4Motor.getCurrentPosition() );
+        telemetry.addData("1", robot.formatAngle(robot.angles.angleUnit, robot.angles.firstAngle));
         telemetry.update();
+        sleep(3000);
         try {
-            while (Float.parseFloat(robot.formatAngle(AngleUnit.DEGREES, robot.angles.firstAngle)) < 90.0) {
+            while (Float.parseFloat(z) < 90.0) {
                 robot.TurnRight(-0.5);
+                telemetry.addData("Status", "A1 = " + robot.A1Motor.getCurrentPosition() );
+                telemetry.addData("Status", "A2 = " + robot.A2Motor.getCurrentPosition() );
+                telemetry.addData("Status", "A3 = " + robot.A3Motor.getCurrentPosition() );
+                telemetry.addData("Status", "A4 = " + robot.A4Motor.getCurrentPosition() );
+                telemetry.addData("1", robot.formatAngle(robot.angles.angleUnit, robot.angles.firstAngle));
+                telemetry.update();
+
                 robot.angles = robot.imu.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES);
+                z = robot.formatAngle(AngleUnit.DEGREES, robot.angles.firstAngle);
 
             }
+
+
+            sleep(1000);
+            robot.Right(0.5, 1120);
+            robot.resetEncoders();
+            robot.Tra.runOpMode();
         }
         catch (Exception exp){
-            telemetry.addData("status", "Fuck: "+exp);
+            telemetry.addData("Fuck", exp);
             telemetry.update();
         }
-        sleep(1000);
-        robot.Right(0.5, 1120);
-        robot.resetEncoders();
 
 
 
@@ -120,6 +134,8 @@ public class AutoTest_Linear extends LinearOpMode {
 
             }
             */
+            robot.angles = robot.imu.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES);
+
             telemetry.addData("1", robot.formatAngle(robot.angles.angleUnit, robot.angles.firstAngle));
             telemetry.addData("Status", "A1 = " + robot.A1Motor.getCurrentPosition() );
             telemetry.addData("Status", "A2 = " + robot.A2Motor.getCurrentPosition() );
