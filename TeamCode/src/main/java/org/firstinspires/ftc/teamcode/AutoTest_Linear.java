@@ -80,6 +80,7 @@ public class AutoTest_Linear extends LinearOpMode {
         telemetry.update();
         sleep(3000);
         try {
+
             while (Float.parseFloat(z) < 90.0) {
                 robot.TurnRight(-0.5);
                 telemetry.addData("Status", "A1 = " + robot.A1Motor.getCurrentPosition() );

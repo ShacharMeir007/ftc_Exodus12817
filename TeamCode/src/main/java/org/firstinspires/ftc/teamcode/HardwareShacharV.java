@@ -95,7 +95,7 @@ import java.util.Locale;
     static public Servo S2Motor = null;
 
 
-    ObjectTracker Tra = new ObjectTracker();
+    ObjectTracker Tra ;
     static public  ColorSensor colorSensor = null;
 
     int vuMarkposition= 0;
@@ -107,16 +107,14 @@ import java.util.Locale;
     Acceleration gravity;
 
 
-
-
-
-
     /* local OpMode members. */
     HardwareMap hwMap           =  null;
     private ElapsedTime period  = new ElapsedTime();
 
     /* Constructor */
     public HardwareShacharV() {
+
+        Tra = new ObjectTracker();
 
     }
 
@@ -252,6 +250,46 @@ import java.util.Locale;
         A3Motor.setPower(-power);
         A4Motor.setPower(-power);
     }
+     static void TurnRight(double power, int target) {
+        power = Math.abs(power);
+         A1Motor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+         A2Motor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+         A3Motor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+         A4Motor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+
+         A1Motor.setTargetPosition(target);
+        A2Motor.setTargetPosition(target);
+        A3Motor.setTargetPosition(target);
+        A4Motor.setTargetPosition(target);
+        A1Motor.setPower(power);
+        A2Motor.setPower(power);
+        A3Motor.setPower(power);
+        A4Motor.setPower(power);
+
+
+
+        while (Math.abs(target - A1Motor.getCurrentPosition()) > 100){
+            A1Motor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+            A2Motor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+            A3Motor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+            A4Motor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
+        }
+
+        A1Motor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        A2Motor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        A3Motor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        A4Motor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+
+        A1Motor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        A2Motor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        A3Motor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        A4Motor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        A1Motor.setPower(0);
+        A2Motor.setPower(0);
+        A3Motor.setPower(0);
+        A4Motor.setPower(0);
+    }
 
 
 
@@ -343,10 +381,10 @@ import java.util.Locale;
                 }
 
                 sleep(100);
-                A1Motor.setPower(power);
-                A2Motor.setPower(-power);
-                A3Motor.setPower(-power);
-                A4Motor.setPower(power);
+                A1Motor.setPower(-power);
+                A2Motor.setPower(power);
+                A3Motor.setPower(power);
+                A4Motor.setPower(-power);
                 count++;
 
             }
@@ -361,10 +399,10 @@ import java.util.Locale;
                 }
 
                 sleep(100);
-                A1Motor.setPower(power);
-                A2Motor.setPower(-power);
-                A3Motor.setPower(-power);
-                A4Motor.setPower(power);
+                A1Motor.setPower(-power);
+                A2Motor.setPower(power);
+                A3Motor.setPower(power);
+                A4Motor.setPower(-power);
                 count--;
             }
 
@@ -372,9 +410,9 @@ import java.util.Locale;
         else{}
 
         A1Motor.setPower(power);
-        A2Motor.setPower(power);
+        A2Motor.setPower(-power);
         A3Motor.setPower(-power);
-        A4Motor.setPower(-power);
+        A4Motor.setPower(power);
         sleep(25);
 
         A1Motor.setPower(0);
