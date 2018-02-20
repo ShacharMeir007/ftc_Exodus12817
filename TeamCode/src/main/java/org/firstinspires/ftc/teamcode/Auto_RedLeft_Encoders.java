@@ -139,7 +139,12 @@ public class Auto_RedLeft_Encoders extends LinearOpMode {
 
                 }
             }
+            robot.Right(0.3, 300);
+            robot.TurnRight(0.3,300);
+            robot.TurnRight(0.3,-300);
+            robot.Stop();
 
+            /*
             if(count == 0) {
 
                 robot.S1Motor.setPosition(0.7);
@@ -177,8 +182,8 @@ public class Auto_RedLeft_Encoders extends LinearOpMode {
                     telemetry.update();
 
                     robot.Right(0.3, 1900);
-                    robot.TurnRight(0.3);
-                    sleep(1475);
+                    robot.TurnRight(0.3,870);
+
 
 
                 }
@@ -187,8 +192,8 @@ public class Auto_RedLeft_Encoders extends LinearOpMode {
                     telemetry.update();
 
                     robot.Right(0.3, 2400);
-                    robot.TurnRight(0.3);
-                    sleep(1525);
+                    robot.TurnRight(0.3,1000);
+
 
 
                 }
@@ -197,8 +202,8 @@ public class Auto_RedLeft_Encoders extends LinearOpMode {
                     telemetry.addData("vuMark", "left");
                     telemetry.update();
                     robot.Right(0.3, 2400);
-                    robot.TurnRight(0.3);
-                    sleep(1350);
+                    robot.TurnRight(0.3,609);
+
 
                 }
                 /*
@@ -217,6 +222,7 @@ public class Auto_RedLeft_Encoders extends LinearOpMode {
                 robot.resetEncoders();
                 robot.Stop();
                 */
+            /*
                 robot.Stop();
                 robot.sleep(3000);
                 robot.Forward(0.3);
@@ -242,10 +248,11 @@ public class Auto_RedLeft_Encoders extends LinearOpMode {
 
 
                 count++;
+                */
 
             }
         }
-    }
+
     String format(OpenGLMatrix transformationMatrix) {
         return (transformationMatrix != null) ? transformationMatrix.formatAsTransform() : "null";
     }

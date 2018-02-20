@@ -259,18 +259,7 @@ public class AutoBlue_Linear_Right extends LinearOpMode {
 
                 }
 
-                robot.Forward(0.3);
-                sleep(800);
-                robot.Stop();
-                robot.B2Motor.setPower(0);
 
-                robot.Forward(-0.3);
-                sleep(450);
-                robot.Forward(0.3);
-                sleep(700);
-                robot.Forward(-0.3);
-                sleep(300);
-                robot.Stop();
 
                 count++;
 

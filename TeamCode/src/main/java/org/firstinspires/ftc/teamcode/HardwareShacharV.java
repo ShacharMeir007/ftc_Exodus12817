@@ -88,11 +88,15 @@ import java.util.Locale;
     static public DcMotor A4Motor = null;
     static public DcMotor B1Motor = null;
     static public DcMotor B2Motor = null;
-    //static public DcMotor B1Motor = null;
-    //static public DcMotor B2Motor = null;
+
+    static public DcMotor V1Motor = null;
+    static public DcMotor V2Motor = null;
 
     static public Servo S1Motor = null;
     static public Servo S2Motor = null;
+    static public Servo S4Motor = null;
+    static public Servo S5Motor = null;
+
 
 
     ObjectTracker Tra ;
@@ -134,7 +138,10 @@ import java.util.Locale;
         B2Motor = hwMap.get(DcMotor.class,"B2");
         S1Motor = hwMap.get(Servo.class,"S1");
         S2Motor = hwMap.get(Servo.class,"S2");
-
+        S4Motor = hwMap.get(Servo.class,"S4");
+        S5Motor = hwMap.get(Servo.class,"S5");
+        V1Motor = hwMap.get(DcMotor.class,"V1");
+        V2Motor = hwMap.get(DcMotor.class,"V2");
 
         colorSensor = hwMap.get(ColorSensor.class , "color");
 
@@ -205,9 +212,26 @@ import java.util.Locale;
         S1Motor.setPosition(0.5);
         S2Motor.setPosition(0.4);
         */
+
+
+
+
+
         S1Motor.setPosition(0.2);
         sleep(50);
         S2Motor.setPosition(0.4);
+
+        //servo checking
+        sleep(50);
+        S4Motor.setPosition(1);
+        sleep(50);
+        S5Motor.setPosition(1);
+
+
+
+
+
+
         /*
         while(S2Motor.getPosition()!= 0.4){
             double position =S2Motor.getPosition();
@@ -244,37 +268,66 @@ import java.util.Locale;
         A3Motor.setPower(power);
         A4Motor.setPower(power);
     }
-    static void TurnRight(double power) {
+    static void TurnRight(double power){
         A1Motor.setPower(-power);
         A2Motor.setPower(-power);
         A3Motor.setPower(-power);
         A4Motor.setPower(-power);
+
     }
-     static void TurnRight(double power, int target) {
+    static void TurnRight(double power , int target) {
+
         power = Math.abs(power);
-         A1Motor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-         A2Motor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-         A3Motor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-         A4Motor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        final double inc = power/10;
+        int count = 1;
 
-         A1Motor.setTargetPosition(target);
-        A2Motor.setTargetPosition(target);
-        A3Motor.setTargetPosition(target);
-        A4Motor.setTargetPosition(target);
-        A1Motor.setPower(power);
-        A2Motor.setPower(power);
-        A3Motor.setPower(power);
-        A4Motor.setPower(power);
+        if (A3Motor.getCurrentPosition() < target) {
+            while (A3Motor.getCurrentPosition() < target) {
+                if (count<=10){
+                    power = inc * count;
+                }
 
+                sleep(100);
+                A1Motor.setPower(power);
+                A2Motor.setPower(power);
+                A3Motor.setPower(power);
+                A4Motor.setPower(power);
+                count++;
 
-
-        while (Math.abs(target - A1Motor.getCurrentPosition()) > 100){
-            A1Motor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-            A2Motor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-            A3Motor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-            A4Motor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+            }
 
         }
+        else if (A3Motor.getCurrentPosition() > target){
+            power = -power;
+            count = -count;
+            while (A3Motor.getCurrentPosition() > target) {
+                if (count>=-10){
+                    power = inc * count;
+                }
+
+                sleep(100);
+                A1Motor.setPower(power);
+                A2Motor.setPower(power);
+                A3Motor.setPower(power);
+                A4Motor.setPower(power);
+                count--;
+            }
+
+        }
+        else{}
+
+        A1Motor.setPower(power);
+        A2Motor.setPower(power);
+        A3Motor.setPower(-power);
+        A4Motor.setPower(-power);
+        sleep(25);
+
+        A1Motor.setPower(0);
+        A2Motor.setPower(0);
+        A3Motor.setPower(0);
+        A4Motor.setPower(0);
+
+
 
         A1Motor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         A2Motor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
@@ -285,11 +338,9 @@ import java.util.Locale;
         A2Motor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         A3Motor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         A4Motor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        A1Motor.setPower(0);
-        A2Motor.setPower(0);
-        A3Motor.setPower(0);
-        A4Motor.setPower(0);
+
     }
+
 
 
 
@@ -604,9 +655,28 @@ import java.util.Locale;
          A3Motor.setTargetPosition(target);
          A4Motor.setTargetPosition(target);
      }
+     public double degree(String num){
+
+         char[] finale = new char[num.length()];
 
 
+         char firstchar = num.charAt(0);
+         if (firstchar != '-' && firstchar != '0' && firstchar != '1' && firstchar != '2' && firstchar != '3' && firstchar != '4' && firstchar != '5' && firstchar != '6' && firstchar != '7' && firstchar != '8' && firstchar != '9') {
+             for (int i = 0; i < num.length(); i++) {
+                 finale[i] = num.charAt(i);
+             }
+             finale[0] = '-';
+             num = "";
+             for (int i = 0; i < finale.length; i++) {
+                 num = num + finale[i];
+             }
+         }
 
 
+         double flo = Double.parseDouble(num);
+         return flo;
+
+
+     }
 }
 
