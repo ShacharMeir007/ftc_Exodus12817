@@ -204,40 +204,13 @@ public class DroneDrive_Iterative extends OpMode {
         if (powerA4 > 1) {
             powerA4 = powerA4 / MaxPower;
         }
-
-
         if (gamepad1.a) {
             c = 1;
         }
-        /*
-        //testing driving motors
-        //A1
-        if (gamepad1.b){
-            c = 0.7;
-            r = 0.5;
-            robot.A1Motor.setPower(powerA1 / MaxPower * c);
-        }
-        //A2
-        if (gamepad1.y){
-            c = 0.7;
-            r = 0.5;
-            robot.A2Motor.setPower(powerA2 / MaxPower * c);
-        }
-        //A3
-        if (gamepad1.x){
-            c = 0.7;
-            r = 0.5;
-            robot.A3Motor.setPower(powerA3 / MaxPower * c);
-        }
-        //The last one is A4
-        */
-
-
-
-            if (gamepad1.right_bumper) {
+        if (gamepad1.right_bumper) {
                 c = 1;
                 r = 0.3;
-            } else {
+        } else {
                 if (gamepad1.left_bumper) {
                     c = 0.36;
                     r = 0.7;
@@ -276,8 +249,56 @@ public class DroneDrive_Iterative extends OpMode {
          **/
 
 
-            robot.V1Motor.setPower(gamepad2.left_stick_y);
-            robot.V2Motor.setPower(-gamepad2.left_stick_y);
+        // Relic grabber
+        robot.V1Motor.setPower(gamepad2.left_stick_y);
+        robot.V2Motor.setPower(-gamepad2.left_stick_y);
+
+
+
+
+
+        //relic - catch buttons
+        if (gamepad2.b){
+            robot.S4Motor.setPosition(0.2);
+        }
+
+        if (gamepad2.x){
+            robot.S4Motor.setPosition(0.9);
+        }
+
+
+        //relic - up and down buttons
+        if (gamepad2.left_bumper){
+            robot.S5Motor.setPosition(0.0);
+        }
+
+        if (gamepad2.right_bumper){
+                /*
+                if(robot.S5Motor.getPosition() != 0.85) {
+                    for (double i = 0; i < 0.85; i = i + 0.05) {
+                        robot.S5Motor.setPosition(i);
+                        robot.sleep(50);
+                    }
+                }
+                */
+            robot.S5Motor.setPosition(0.85);
+        }
+
+        if (gamepad2.y){
+            robot.S5Motor.setPosition(1.0); //back to first position
+        }
+
+
+
+        // Elevator
+        robot.B1Motor.setPower(gamepad2.right_stick_y);
+
+
+
+
+
+
+
 
             /*if(gamepad2.left_trigger > 0.1)
             {
@@ -293,7 +314,7 @@ public class DroneDrive_Iterative extends OpMode {
                 else robot.B2Motor.setPower(0);
             }*/
 
-            //relic
+        //relic
         /*
             if (gamepad2.left_bumper && grabberTilt>=0.05){
                 grabberTilt = grabberTilt - 0.05;
@@ -309,30 +330,6 @@ public class DroneDrive_Iterative extends OpMode {
             }
            */
 
-
-
-
-
-            if (gamepad2.b){
-                robot.S4Motor.setPosition(0.2);
-            }
-
-            if (gamepad2.x){
-                robot.S4Motor.setPosition(0.9);
-            }
-            if (gamepad2.left_bumper){
-                robot.S5Motor.setPosition(0.0);
-            }
-
-            if (gamepad2.right_bumper){
-                robot.S5Motor.setPosition(0.75);
-            }
-
-
-
-
-        // Relic grabber
-        robot.B1Motor.setPower(gamepad2.right_stick_y);
 
 
         /**

@@ -129,21 +129,45 @@ import java.util.Locale;
 
         hwMap = ahwMap;
 
-        // Define and Initialize Motors, Sensors and Vuforia
+        /*
+         -------------------------------------------------------------------------------------------
+         START
+         Define and Initialize Motors, Sensors and Vuforia
+         -------------------------------------------------------------------------------------------
+
+         */
+
+        // DC MOTORS
         A1Motor = hwMap.get(DcMotor.class,"A1_drive");
         A2Motor = hwMap.get(DcMotor.class,"A2_drive");
         A3Motor = hwMap.get(DcMotor.class,"A3_drive");
         A4Motor = hwMap.get(DcMotor.class,"A4_drive");
         B1Motor = hwMap.get(DcMotor.class,"B1");
         B2Motor = hwMap.get(DcMotor.class,"B2");
+        V1Motor = hwMap.get(DcMotor.class,"V1");
+        V2Motor = hwMap.get(DcMotor.class,"V2");
+        //SERVOS
         S1Motor = hwMap.get(Servo.class,"S1");
         S2Motor = hwMap.get(Servo.class,"S2");
         S4Motor = hwMap.get(Servo.class,"S4");
         S5Motor = hwMap.get(Servo.class,"S5");
-        V1Motor = hwMap.get(DcMotor.class,"V1");
-        V2Motor = hwMap.get(DcMotor.class,"V2");
 
+        //COLOR SENSOR
         colorSensor = hwMap.get(ColorSensor.class , "color");
+
+        /*
+         -------------------------------------------------------------------------------------------
+         END
+         Define and Initialize Motors, Sensors and Vuforia
+         -------------------------------------------------------------------------------------------
+
+         */
+
+
+
+
+
+
 
         A1Motor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         A2Motor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
@@ -151,6 +175,7 @@ import java.util.Locale;
         A4Motor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         B2Motor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
+        // Set all motors to run without encoders.
         A1Motor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         A2Motor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         A3Motor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
@@ -179,39 +204,25 @@ import java.util.Locale;
 
 
 
-    // Set all motors to zero power
-        //C1Motor.setTargetPosition(0);
-
-        //Autonomous period//
 
 
 
 
-        //A1Motor.setDirection(DcMotorSimple.Direction.REVERSE);
-        //A2Motor.setDirection(DcMotorSimple.Direction.REVERSE);
-        //A3Motor.setDirection(DcMotorSimple.Direction.REVERSE);
-        //A4Motor.setDirection(DcMotorSimple.Direction.REVERSE);
-
-        // Set all motors to run without encoders.
-        // May want to use RUN_USING_ENCODERS if encoders are installed.
-
-        // Define and initialize ALL installed servos.
 
 
 
+
+
+
+
+        // Set all motors to zero power
         A1Motor.setPower(0);
         A2Motor.setPower(0);
         A3Motor.setPower(0);
         A4Motor.setPower(0);
 
 
-        //color.enableLed(true);
-        //B1Motor.setPower(0);
-        //B2Motor.setPower(0);
-        /*
-        S1Motor.setPosition(0.5);
-        S2Motor.setPosition(0.4);
-        */
+
 
 
 
@@ -232,22 +243,8 @@ import java.util.Locale;
 
 
 
-        /*
-        while(S2Motor.getPosition()!= 0.4){
-            double position =S2Motor.getPosition();
-            if(S2Motor.getPosition()< 0.4){
-                position = position+0.01;
-                S2Motor.setPosition(position);
-            }
-            else {
-                position = position-0.01;
-                S2Motor.setPosition(position);
-            }
-            sleep(250);
 
 
-        }
-        */
 
     }
     static void Stop(){
