@@ -60,7 +60,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.VuforiaTrackables;
  * Remove or comment out the @Disabled line to add this opmode to the Driver Station OpMode list
  */
 
-@Autonomous(name="Auto_RedRight_Encoders", group="Linear Opmode")
+@Autonomous(name="Auto_BlueLeft_Encoders", group="Linear Opmode")
 //@Disabled
 public class Auto_BlueLeft_Encoders extends LinearOpMode {
 
@@ -232,7 +232,7 @@ public class Auto_BlueLeft_Encoders extends LinearOpMode {
                     telemetry.addData("vuMark", "right");
                     telemetry.update();
 
-                    robot.Right(0.3,575);
+                    robot.Right(0.3,1375);
                     robot.resetEncoders();
                 }
 
@@ -252,7 +252,8 @@ public class Auto_BlueLeft_Encoders extends LinearOpMode {
                 else if (position == 3) {
                     telemetry.addData("vuMark", "left");
                     telemetry.update();
-                    robot.Right(0.3,1375);
+                    robot.Right(0.3,575);
+
                     robot.resetEncoders();
 
 

@@ -20,7 +20,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.VuforiaTrackables;
 /**
  * Created by shach on 2/11/2018.
  */
-@Autonomous(name="Auto_RedLeft_Encoders", group="Linear Opmode")
+@Autonomous(name="Auto_BlueRight_Encoders", group="Linear Opmode")
 //@Disabled
 
 public class Auto_BlueRight_Encoders extends LinearOpMode {
@@ -179,7 +179,7 @@ public class Auto_BlueRight_Encoders extends LinearOpMode {
                     telemetry.addData("vuMark", "right");
                     telemetry.update();
 
-                    robot.Right(0.3, -1600);
+                    robot.Right(0.3, -2750);
                     robot.resetEncoders();
                     robot.TurnRight(0.4,2250);
                     sleep(400);
@@ -204,7 +204,8 @@ public class Auto_BlueRight_Encoders extends LinearOpMode {
                 else if (position == 3) {
                     telemetry.addData("vuMark", "left");
                     telemetry.update();
-                    robot.Right(0.3, -2750);
+                    robot.Right(0.3, -1600);
+
                     robot.resetEncoders();
                     robot.TurnRight(0.4,2250);
                     sleep(1525);
