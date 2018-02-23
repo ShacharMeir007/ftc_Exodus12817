@@ -32,6 +32,7 @@ THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 package org.firstinspires.ftc.teamcode;
 
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
@@ -57,7 +58,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.AxesReference;
 
 
 @TeleOp(name="GyroTest", group="Iterative Opmode")  // @Tom(...) is the other common choice
-//@Disabled
+@Disabled
 public class GyroTest_Iterative extends OpMode {
     /* Declare OpMode members. */
     private double LeftAxis_y;

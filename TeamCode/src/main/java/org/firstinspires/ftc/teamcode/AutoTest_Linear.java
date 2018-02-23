@@ -55,7 +55,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.AxesReference;
  */
 
 @TeleOp(name="Auto test", group="Linear Opmode")
-//@Disabled
+@Disabled
 public class AutoTest_Linear extends LinearOpMode {
 
     // Declare OpMode members.

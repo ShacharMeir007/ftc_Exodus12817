@@ -32,6 +32,7 @@ THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 package org.firstinspires.ftc.teamcode;
 
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
@@ -61,7 +62,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.AxesReference;
 
 
 @TeleOp(name="Drive", group="Iterative Opmode")  // @Tom(...) is the other common choice
-//@Disabled
+@Disabled
 public class FinalDriveOpMode_Iterative extends OpMode {
     /* Declare OpMode members. */
     private double LeftAxis_y;

@@ -292,8 +292,10 @@ public class DroneDrive_Iterative extends OpMode {
 
         // Elevator
         robot.B1Motor.setPower(gamepad2.right_stick_y);
-
-
+        // relic arm
+        if (gamepad2.right_trigger > 0.1) robot.B2Motor.setPower(gamepad2.right_trigger);
+        else if (gamepad2.left_trigger > 0.1) robot.B2Motor.setPower(-gamepad2.left_trigger);
+        else robot.B2Motor.setPower(0);
 
 
 

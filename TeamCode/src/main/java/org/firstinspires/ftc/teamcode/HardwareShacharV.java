@@ -230,7 +230,7 @@ import java.util.Locale;
 
         S1Motor.setPosition(0.2);
         sleep(50);
-        S2Motor.setPosition(0.4);
+        S2Motor.setPosition(0.45);
 
         //servo checking
         sleep(50);

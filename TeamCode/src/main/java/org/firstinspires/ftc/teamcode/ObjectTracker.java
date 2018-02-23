@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode;
 
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.vuforia.HINT;
@@ -19,7 +20,7 @@ import java.security.Policy;
  * Created by shach on 2/6/2018.
  */
 @TeleOp(name="Object Tracker", group="Linear Opmode")
-//@Disabled
+@Disabled
 public class ObjectTracker extends LinearOpMode {
 
     VuforiaLocalizer vuforia;

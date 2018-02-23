@@ -1,3 +1,32 @@
+/* Copyright (c) 2017 FIRST. All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without modification,
+ * are permitted (subject to the limitations in the disclaimer below) provided that
+ * the following conditions are met:
+ *
+ * Redistributions of source code must retain the above copyright notice, this list
+ * of conditions and the following disclaimer.
+ *
+ * Redistributions in binary form must reproduce the above copyright notice, this
+ * list of conditions and the following disclaimer in the documentation and/or
+ * other materials provided with the distribution.
+ *
+ * Neither the name of FIRST nor the names of its contributors may be used to endorse or
+ * promote products derived from this software without specific prior written permission.
+ *
+ * NO EXPRESS OR IMPLIED LICENSES TO ANY PARTY'S PATENT RIGHTS ARE GRANTED BY THIS
+ * LICENSE. THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+ * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,
+ * THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ * ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE
+ * FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+ * DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+ * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+ * CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+ * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+ * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ */
+
 package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
@@ -17,15 +46,25 @@ import org.firstinspires.ftc.robotcore.external.navigation.VuforiaTrackable;
 import org.firstinspires.ftc.robotcore.external.navigation.VuforiaTrackableDefaultListener;
 import org.firstinspires.ftc.robotcore.external.navigation.VuforiaTrackables;
 
+
 /**
- * Created by shach on 2/11/2018.
+ * This file contains an minimal example of a Linear "OpMode". An OpMode is a 'program' that runs in either
+ * the autonomous or the teleop period of an FTC match. The names of OpModes appear on the menu
+ * of the FTC Driver Station. When an selection is made from the menu, the corresponding OpMode
+ * class is instantiated on the Robot Controller and executed.
+ *
+ * This particular OpMode just executes a basic Tank Drive Teleop for a two wheeled robot
+ * It includes all the skeletal structure that all linear OpModes contain.
+ *
+ * Use Android Studios to Copy this Class, and Paste it into your team's code folder with a new name.
+ * Remove or comment out the @Disabled line to add this opmode to the Driver Station OpMode list
  */
-@Autonomous(name="Auto_RedLeft_Encoders", group="Linear Opmode")
+
+@Autonomous(name="Auto_RedRight_Encoders", group="Linear Opmode")
 //@Disabled
+public class Auto_RedRight_Encoders extends LinearOpMode {
 
-public class Auto_BlueRight_Encoders extends LinearOpMode {
-
-
+    // Declare OpMode members.
     private ElapsedTime runtime = new ElapsedTime();
     int count;
     HardwareShacharV robot = new HardwareShacharV();
@@ -41,8 +80,17 @@ public class Auto_BlueRight_Encoders extends LinearOpMode {
     VuforiaLocalizer vuforia;
     int position = 0;
 
+
+
+
+
+
+
+
+
     @Override
-    public void runOpMode(){
+    public void runOpMode() {
+
         robot.init(hardwareMap);
         int cameraMonitorViewId = hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName());
         VuforiaLocalizer.Parameters parameters = new VuforiaLocalizer.Parameters(cameraMonitorViewId);
@@ -73,6 +121,8 @@ public class Auto_BlueRight_Encoders extends LinearOpMode {
         waitForStart();
         relicTrackables.activate();
         runtime.reset();
+
+        // run until the end of the match (driver presses STOP)
         while (opModeIsActive()) {
 
             while (runtime.seconds() < 5 && position == 0) {
@@ -144,16 +194,21 @@ public class Auto_BlueRight_Encoders extends LinearOpMode {
 
                 robot.S1Motor.setPosition(0.7);
                 robot.sleep(1000);
-                if (robot.colorSensor.red() < robot.colorSensor.blue()){
-                    robot.S2Motor.setPosition(0.7);
+                if (robot.colorSensor.red() > robot.colorSensor.blue()){
+                    robot.S2Motor.setPosition(0.6);
 
 
                 }
                 else robot.S2Motor.setPosition(0.3);
 
+
                 sleep(1000);
-                robot.S2Motor.setPosition(0.5);
+                robot.S2Motor.setPosition(0.4);
                 robot.S1Motor.setPosition(0.2);
+                robot.resetEncoders();
+
+
+
                 robot.resetEncoders();
                 robot.V1Motor.setPower(-0.2);
                 robot.V2Motor.setPower(0.2);
@@ -162,52 +217,44 @@ public class Auto_BlueRight_Encoders extends LinearOpMode {
                 sleep(2000);
                 robot.V1Motor.setPower(0);
                 robot.V2Motor.setPower(0);
+
                 robot.B1Motor.setPower(0);
+                robot.Right(0.6,1400);
+
+                robot.TurnRight(0.3,1125);
+                robot.resetEncoders();
 
 
 
-
-                telemetry.addData("A1", robot.A1Motor.getCurrentPosition());
-                telemetry.addData("A2", robot.A2Motor.getCurrentPosition());
-                telemetry.addData("A3", robot.A3Motor.getCurrentPosition());
-                telemetry.addData("A4", robot.A4Motor.getCurrentPosition());
-                telemetry.update();
-                sleep(400);
 
                 //right
                 if (position == 1) {
                     telemetry.addData("vuMark", "right");
                     telemetry.update();
 
-                    robot.Right(0.3, -1600);
+                    robot.Right(0.3,-575);
                     robot.resetEncoders();
-                    robot.TurnRight(0.4,2250);
-                    sleep(400);
-
-
-
                 }
+
+
                 //center
                 else if (position == 2|| position ==0) {
                     telemetry.addData("vuMark", "center");
                     telemetry.update();
-
-                    robot.Right(0.3, -2200);
+                    robot.Right(0.3,-1000);
                     robot.resetEncoders();
-                    robot.TurnRight(0.4,2250);
-                    sleep(2000);
+
+
 
 
                 }
                 //left
-
                 else if (position == 3) {
                     telemetry.addData("vuMark", "left");
                     telemetry.update();
-                    robot.Right(0.3, -2750);
+                    robot.Right(0.3,-1375);
                     robot.resetEncoders();
-                    robot.TurnRight(0.4,2250);
-                    sleep(1525);
+
 
                 }
                 robot.Stop();
@@ -227,19 +274,74 @@ public class Auto_BlueRight_Encoders extends LinearOpMode {
                 robot.resetEncoders();
 
                 robot.Stop();
-                
+                count++;
+                /*
+                robot.resetEncoders();
+                robot.Forward(0.3);
+                sleep(2000);
+                robot.resetEncoders();
+                robot.Stop();
+                robot.V1Motor.setPower(0.2);
+                robot.V2Motor.setPower(-0.2);
+                robot.resetEncoders();
+                robot.Forward(0.3,-400);
+                robot.resetEncoders();
+                robot.Forward(0.3);
+                sleep(2000);
+                robot.resetEncoders();
+                robot.Forward(0.3,-400);
+                robot.resetEncoders();
+                */
+
+
+            }
 
 
 
 
-
-
-
+/*
+            robot.S3Motor.setPosition(0.76);
+            robot.sleep(1000);
+            if (robot.colorSensor.red() < robot.colorSensor.blue()) {
+                robot.TurnRight(0.1);
+                robot.sleep(600);
+                robot.Stop();
+                robot.S3Motor.setPosition(0.2);
+                robot.sleep(1000);
+                robot.Forward(0.1);
+                robot.sleep(450);
+                robot.Stop();
+                robot.TurnLeft(0.1);
+                robot.sleep(600);
+                robot.Stop();
+            }
+            else {
+                robot.TurnLeft(0.1);
+                robot.sleep(600);
+                robot.Stop();
+                robot.S3Motor.setPosition(0.2);
+                robot.sleep(1000);
+                robot.Forward(0.1);
+                robot.sleep(450);
+                robot.Stop();
+                robot.TurnRight(0.1);
+                robot.sleep(600);
+                robot.Stop();
+            }
 
 
                 count++;
 
             }
+            */
+
+
+            // Setup a variable for each drive wheel to save power level for telemetry
+
+            // Show the elapsed game time and wheel power.
+            telemetry.addData("Status", "Run Time: " + runtime.toString());
+            telemetry.addData("Position:", position);
+            telemetry.update();
         }
     }
     String format(OpenGLMatrix transformationMatrix) {
