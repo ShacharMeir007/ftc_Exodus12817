@@ -155,13 +155,12 @@ public class Auto_RedLeft_Encoders extends LinearOpMode {
                 robot.S2Motor.setPosition(0.5);
                 robot.S1Motor.setPosition(0.2);
                 robot.resetEncoders();
-                robot.V1Motor.setPower(-0.2);
-                robot.V2Motor.setPower(0.2);
+                robot.V2Motor.setPower(-0.3);
 
-                robot.B1Motor.setPower(-0.2);
-                sleep(2000);
-                robot.V1Motor.setPower(0);
-                robot.V2Motor.setPower(0);
+
+                robot.B1Motor.setPower(-0.4);
+                sleep(1500);
+
                 robot.B1Motor.setPower(0);
 
 
@@ -179,10 +178,10 @@ public class Auto_RedLeft_Encoders extends LinearOpMode {
                     telemetry.addData("vuMark", "right");
                     telemetry.update();
 
-                    robot.Right(0.3, 1600);
+                    robot.Right(0.3, 2200);
                     robot.resetEncoders();
-                    robot.TurnRight(0.4,2250);
-                    sleep(400);
+                    robot.TurnLeft(0.3,2000);
+                    sleep(2000);
 
 
 
@@ -192,9 +191,9 @@ public class Auto_RedLeft_Encoders extends LinearOpMode {
                     telemetry.addData("vuMark", "center");
                     telemetry.update();
 
-                    robot.Right(0.3, 2200);
+                    robot.Right(0.3, 1650);
                     robot.resetEncoders();
-                    robot.TurnRight(0.4,2250);
+                    robot.TurnLeft(0.3,-2000);
                     sleep(2000);
 
 
@@ -204,30 +203,51 @@ public class Auto_RedLeft_Encoders extends LinearOpMode {
                 else if (position == 3) {
                     telemetry.addData("vuMark", "left");
                     telemetry.update();
-                    robot.Right(0.3, 2750);
+
+                    robot.Right(0.3, 2200);
                     robot.resetEncoders();
-                    robot.TurnRight(0.4,2250);
-                    sleep(1525);
+                    robot.TurnLeft(0.3,-2000);
+                    sleep(2000);
 
                 }
+                /*
+
                 robot.Stop();
-                robot.V1Motor.setPower(0.2);
-                robot.V2Motor.setPower(-0.2);
+                robot.sleep(400);
+
+
+                robot.V2Motor.setPower(0);
+                robot.Stop();
+                robot.sleep(1000);
+                robot.Forward(0.3);
+                sleep(1000);
+                robot.Stop();
+                robot.B2Motor.setPower(0);
+
+                robot.Forward(-0.3);
+                sleep(450);
+                robot.Forward(0.3);
+                sleep(1700);
+                robot.Forward(-0.3);
+                sleep(300);
+                robot.Stop();
+                robot.Stop();
+                */
+                robot.Stop();
+                robot.V2Motor.setPower(0.4);
                 robot.Stop();
                 robot.sleep(3000);
+                robot.V2Motor.setPower(0.1);
                 robot.Forward(0.3);
                 sleep(1500);
-                robot.V1Motor.setPower(0);
-                robot.V2Motor.setPower(0);
                 robot.Forward(0.3);
                 sleep(1500);
                 robot.resetEncoders();
-                robot.Forward(-0.3, -150);
+                robot.Forward(-0.3, -200);
                 sleep(300);
                 robot.resetEncoders();
 
                 robot.Stop();
-                
 
 
 

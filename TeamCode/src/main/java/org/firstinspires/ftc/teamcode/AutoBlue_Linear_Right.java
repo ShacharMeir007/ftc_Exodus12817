@@ -31,7 +31,6 @@ package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
-import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.robotcore.external.ClassFactory;
@@ -234,7 +233,7 @@ public class AutoBlue_Linear_Right extends LinearOpMode {
 
                     robot.Right(-0.3);
                     sleep(3750);
-                    robot.TurnRight(0.3);
+                    robot.TurnLeft(0.3);
                     sleep(3050);
 
 
@@ -245,7 +244,7 @@ public class AutoBlue_Linear_Right extends LinearOpMode {
 
                     robot.Right(-0.3);
                     sleep(2700);
-                    robot.TurnRight(-0.3);
+                    robot.TurnLeft(-0.3);
                     sleep(3050);
                 }
 
@@ -254,7 +253,7 @@ public class AutoBlue_Linear_Right extends LinearOpMode {
                     telemetry.update();
                     robot.Right(-0.3);
                     sleep(2400);
-                    robot.TurnRight(-0.3);
+                    robot.TurnLeft(-0.3);
                     sleep(3050);
 
                 }
@@ -272,7 +271,7 @@ public class AutoBlue_Linear_Right extends LinearOpMode {
             robot.S3Motor.setPosition(0.76);
             robot.sleep(1000);
             if (robot.colorSensor.red() < robot.colorSensor.blue()) {
-                robot.TurnRight(0.1);
+                robot.TurnLeft(0.1);
                 robot.sleep(600);
                 robot.Stop();
                 robot.S3Motor.setPosition(0.2);
@@ -293,7 +292,7 @@ public class AutoBlue_Linear_Right extends LinearOpMode {
                 robot.Forward(0.1);
                 robot.sleep(450);
                 robot.Stop();
-                robot.TurnRight(0.1);
+                robot.TurnLeft(0.1);
                 robot.sleep(600);
                 robot.Stop();
             }

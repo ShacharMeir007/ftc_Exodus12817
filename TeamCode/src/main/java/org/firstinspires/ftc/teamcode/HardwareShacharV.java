@@ -78,7 +78,7 @@ import java.util.Locale;
  * Servo channel:  Servo to open left claw:  "left_hand"
  * Servo channel:  Servo to open right claw: "right_hand"
  */
- public class HardwareShacharV
+ public class HardwareShacharV implements RobotConfigurationInterface
 {
     /* Public OpMode members. */
     static public ElapsedTime runtime = new ElapsedTime();
@@ -124,6 +124,7 @@ import java.util.Locale;
 
 
     /* Initialize standard Hardware interfaces */
+    @Override
     public  void init(HardwareMap ahwMap) {
         // Save reference to Hardware map
 
@@ -265,14 +266,14 @@ import java.util.Locale;
         A3Motor.setPower(power);
         A4Motor.setPower(power);
     }
-    static void TurnRight(double power){
+    static void TurnLeft(double power){
         A1Motor.setPower(-power);
         A2Motor.setPower(-power);
         A3Motor.setPower(-power);
         A4Motor.setPower(-power);
 
     }
-    static void TurnRight(double power , int target) {
+    static void TurnLeft(double power , int target) {
 
         power = Math.abs(power);
         final double inc = power/10;
@@ -368,6 +369,7 @@ import java.util.Locale;
             }
 
         }
+
         else if (A3Motor.getCurrentPosition() > target){
             power = -power;
             count = -count;
@@ -519,7 +521,7 @@ import java.util.Locale;
         A3Motor.setPower(-power);
         A4Motor.setPower(-power);
     }
-    static void TurnRight(double power, int target){
+    static void TurnLeft(double power, int target){
         A1Motor.setTargetPosition(target);
         A2Motor.setTargetPosition(target);
         A3Motor.setTargetPosition(target);
@@ -531,6 +533,10 @@ import java.util.Locale;
         A4Motor.setPower(power);
     }
      */
+
+
+
+
     public static final void sleep(long milliseconds) {
         try {
             Thread.sleep(milliseconds);
@@ -675,5 +681,8 @@ import java.util.Locale;
 
 
      }
+
+
+
 }
 

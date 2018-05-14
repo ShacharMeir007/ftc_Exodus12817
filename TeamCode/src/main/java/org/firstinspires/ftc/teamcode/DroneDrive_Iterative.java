@@ -76,7 +76,8 @@ public class DroneDrive_Iterative extends OpMode {
      double     enco    = 1440 ;
      int target;
      double grabberTilt = 1;
-
+     int relicMode =0;
+     double pow = 0;
 
     HardwareShacharV robot = new HardwareShacharV();
 
@@ -112,7 +113,7 @@ public class DroneDrive_Iterative extends OpMode {
         /*robot.Right(0.35);
         robot.sleep(1170);
         robot.Stop();
-        robot.TurnRight(0.36);
+        robot.TurnLeft(0.36);
         robot.sleep(260);
         robot.Stop();
 
@@ -130,6 +131,7 @@ public class DroneDrive_Iterative extends OpMode {
     public void init_loop() {
         //robot.Forward(1);
         //robot.sleep(5000);
+
 
     }
 
@@ -212,8 +214,8 @@ public class DroneDrive_Iterative extends OpMode {
                 r = 0.3;
         } else {
                 if (gamepad1.left_bumper) {
-                    c = 0.36;
-                    r = 0.7;
+                    c = 0.5;
+                    r = 0.4;
                 } else {
                     c = 0.7;
                     r = 0.5;
@@ -250,87 +252,88 @@ public class DroneDrive_Iterative extends OpMode {
 
 
         // Relic grabber
-        robot.V1Motor.setPower(gamepad2.left_stick_y);
-        robot.V2Motor.setPower(-gamepad2.left_stick_y);
-
 
 
 
 
         //relic - catch buttons
-        if (gamepad2.b){
+        if (gamepad2.y){
             robot.S4Motor.setPosition(0.2);
         }
 
-        if (gamepad2.x){
+        if (gamepad2.b){
             robot.S4Motor.setPosition(0.9);
         }
 
 
         //relic - up and down buttons
-        if (gamepad2.left_bumper){
-            robot.S5Motor.setPosition(0.0);
+        if(gamepad2.dpad_up && relicMode < 2) {
+            relicMode++;
+            switch (relicMode) {
+                case 0:
+                default:
+                    robot.S5Motor.setPosition(1.0); //back to first position
+                    break;
+                case 1:
+                    robot.S5Motor.setPosition(0.85);// middle
+                    break;
+                case 2:
+                    robot.S5Motor.setPosition(0.0);//low
+                    break;
+
+
+            }
+            while (gamepad2.dpad_up);
+        }
+        else if(gamepad2.dpad_down && relicMode > 0) {
+            relicMode--;
+            switch (relicMode) {
+                case 0:
+                default:
+                    robot.S5Motor.setPosition(1.0); //back to first position
+                    break;
+                case 1:
+                    robot.S5Motor.setPosition(0.85);// middle
+                    break;
+                case 2:
+                    robot.S5Motor.setPosition(0.0);//low
+                    break;
+
+
+            }
+            while (gamepad2.dpad_down);
         }
 
-        if (gamepad2.right_bumper){
-                /*
-                if(robot.S5Motor.getPosition() != 0.85) {
-                    for (double i = 0; i < 0.85; i = i + 0.05) {
-                        robot.S5Motor.setPosition(i);
-                        robot.sleep(50);
-                    }
-                }
-                */
-            robot.S5Motor.setPosition(0.85);
-        }
 
-        if (gamepad2.y){
-            robot.S5Motor.setPosition(1.0); //back to first position
-        }
+
+
 
 
 
         // Elevator
         robot.B1Motor.setPower(gamepad2.right_stick_y);
         // relic arm
-        if (gamepad2.right_trigger > 0.1) robot.B2Motor.setPower(gamepad2.right_trigger);
-        else if (gamepad2.left_trigger > 0.1) robot.B2Motor.setPower(-gamepad2.left_trigger);
+        if (gamepad2.dpad_right) robot.B2Motor.setPower(1);
+        else if (gamepad2.dpad_left) robot.B2Motor.setPower(-1);
         else robot.B2Motor.setPower(0);
 
+        //grabbers
+        //down grabber
+        if (gamepad2.right_trigger > 0.1) robot.V2Motor.setPower(gamepad2.right_trigger*0.25);
+        else if (gamepad2.left_trigger > 0.1) robot.V2Motor.setPower(-gamepad2.left_trigger*0.25);
+        else robot.V2Motor.setPower(0);
+        // up grabber
+
+
+            if (gamepad2.right_bumper)
+                robot.V1Motor.setPower(0.3);
+            else if (gamepad2.left_bumper) robot.V1Motor.setPower(-0.3);
+            else robot.V1Motor.setPower(0);
 
 
 
 
 
-            /*if(gamepad2.left_trigger > 0.1)
-            {
-                robot.B2Motor.setPower(-gamepad2.left_trigger*0.2);
-
-            }
-            else {
-                if(gamepad2.right_trigger>0.1)
-                {
-                    robot.B2Motor.setPower(gamepad2.right_trigger*0.2);
-
-                }
-                else robot.B2Motor.setPower(0);
-            }*/
-
-        //relic
-        /*
-            if (gamepad2.left_bumper && grabberTilt>=0.05){
-                grabberTilt = grabberTilt - 0.05;
-                robot.S5Motor.setPosition(grabberTilt);
-                robot.sleep(50);
-            }
-
-
-            if (gamepad2.right_bumper && a<=0.95){
-            grabberTilt = grabberTilt + 0.05;
-            robot.S5Motor.setPosition(grabberTilt);
-            robot.sleep(50);
-            }
-           */
 
 
 

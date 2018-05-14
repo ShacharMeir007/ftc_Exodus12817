@@ -110,7 +110,7 @@ public class GyroTest_Iterative extends OpMode {
         /*robot.Right(0.35);
         robot.sleep(1170);
         robot.Stop();
-        robot.TurnRight(0.36);
+        robot.TurnLeft(0.36);
         robot.sleep(260);
         robot.Stop();
 

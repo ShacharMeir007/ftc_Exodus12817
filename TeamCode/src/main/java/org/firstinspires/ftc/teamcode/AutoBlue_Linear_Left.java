@@ -213,7 +213,7 @@ public class AutoBlue_Linear_Left extends LinearOpMode {
                 sleep(2000);
 
 
-                robot.TurnRight(-0.3);
+                robot.TurnLeft(-0.3);
                 sleep(1440);
 
 
@@ -271,7 +271,7 @@ public class AutoBlue_Linear_Left extends LinearOpMode {
             robot.S3Motor.setPosition(0.76);
             robot.sleep(1000);
             if (robot.colorSensor.red() < robot.colorSensor.blue()) {
-                robot.TurnRight(0.1);
+                robot.TurnLeft(0.1);
                 robot.sleep(600);
                 robot.Stop();
                 robot.S3Motor.setPosition(0.2);
@@ -292,7 +292,7 @@ public class AutoBlue_Linear_Left extends LinearOpMode {
                 robot.Forward(0.1);
                 robot.sleep(450);
                 robot.Stop();
-                robot.TurnRight(0.1);
+                robot.TurnLeft(0.1);
                 robot.sleep(600);
                 robot.Stop();
             }

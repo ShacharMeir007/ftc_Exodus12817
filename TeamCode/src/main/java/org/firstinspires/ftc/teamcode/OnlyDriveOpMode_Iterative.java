@@ -107,12 +107,12 @@ public class OnlyDriveOpMode_Iterative extends OpMode {
             robot.sleep(200);
             robot.S3Motor.setPosition(0.1);
             robot.sleep(1000);
-            robot.TurnRight(0.1);
+            robot.TurnLeft(0.1);
             robot.sleep(200);
             robot.Stop();
         }
         else if (robot.colorSensor.red() < robot.colorSensor.blue()) {
-            robot.TurnRight(0.1);
+            robot.TurnLeft(0.1);
             robot.sleep(500);
             robot.S3Motor.setPosition(0.1);
             robot.sleep(200);
@@ -125,7 +125,7 @@ public class OnlyDriveOpMode_Iterative extends OpMode {
         /*robot.Right(0.35);
         robot.sleep(1170);
         robot.Stop();
-        robot.TurnRight(0.36);
+        robot.TurnLeft(0.36);
         robot.sleep(260);
         robot.Stop();
 

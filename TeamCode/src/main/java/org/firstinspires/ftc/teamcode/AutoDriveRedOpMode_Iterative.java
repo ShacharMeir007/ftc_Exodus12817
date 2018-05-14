@@ -135,7 +135,7 @@ public class AutoDriveRedOpMode_Iterative extends OpMode {
         /*robot.Right(0.35);
         robot.sleep(1170);
         robot.Stop();
-        robot.TurnRight(0.36);
+        robot.TurnLeft(0.36);
         robot.sleep(260);
         robot.Stop();
 
@@ -200,7 +200,7 @@ public class AutoDriveRedOpMode_Iterative extends OpMode {
             robot.S3Motor.setPosition(0.76);
             robot.sleep(1000);
             if (robot.colorSensor.red() < robot.colorSensor.blue()) {
-                robot.TurnRight(0.1);
+                robot.TurnLeft(0.1);
                 robot.sleep(600);
                 robot.Stop();
                 robot.S3Motor.setPosition(0.2);
@@ -221,7 +221,7 @@ public class AutoDriveRedOpMode_Iterative extends OpMode {
                 robot.Forward(0.1);
                 robot.sleep(450);
                 robot.Stop();
-                robot.TurnRight(0.1);
+                robot.TurnLeft(0.1);
                 robot.sleep(600);
                 robot.Stop();
             }

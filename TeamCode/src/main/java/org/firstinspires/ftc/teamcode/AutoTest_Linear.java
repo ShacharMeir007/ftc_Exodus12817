@@ -87,7 +87,7 @@ public class AutoTest_Linear extends LinearOpMode {
                 while ( gyro_z < 90) {
                     telemetry.addData("gyro", robot.formatAngle(robot.angles.angleUnit, robot.angles.firstAngle));
                     telemetry.update();
-                    robot.TurnRight(-0.2);
+                    robot.TurnLeft(-0.2);
                     robot.angles = robot.imu.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES);
                     telemetry.addData("gyro", " hi");
                     gyro_z = Float.parseFloat(robot.formatAngle(robot.angles.angleUnit, robot.angles.firstAngle));
