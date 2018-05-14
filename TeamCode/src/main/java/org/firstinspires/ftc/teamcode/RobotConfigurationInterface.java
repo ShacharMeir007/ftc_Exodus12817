@@ -7,6 +7,6 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
  */
 
 public interface RobotConfigurationInterface {
-    int e =5;
+
     void init(HardwareMap ahwmap);
 }
